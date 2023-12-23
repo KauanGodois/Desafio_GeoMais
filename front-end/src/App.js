@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import PersonForm from './components/PersonForm';
 import PersonList from './components/PersonList';
+import FilterButton from './components/FilterButton'; 
 
 function App() {
   const [data, setData] = useState([]);
@@ -171,6 +172,10 @@ function App() {
     });
   };
 
+  const handleSearch = term => {
+    setSearchTerm(term);
+  };
+
   return (
     <div>
       <h1>Cadastro de Pessoas</h1>
@@ -181,9 +186,9 @@ function App() {
         editingPerson={editingPerson}
         handleCancelEdit={handleCancelEdit}
       />
-      <p>Total de Pessoas Cadastradas: {totalPeople}</p>
+      <FilterButton searchTerm={searchTerm} handleSearch={handleSearch} fetchData={fetchData} />
       <PersonList data={data} handleEdit={handleEdit} handleDelete={handleDelete} />
-      
+      <p>Total de Pessoas Cadastradas: {totalPeople}</p>
     </div>
   );
 }
